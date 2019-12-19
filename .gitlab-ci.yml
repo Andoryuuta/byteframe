@@ -6,7 +6,7 @@ stages:
 before_script:
   - mkdir -p /go/src/gitlab.com/Andoryuuta /go/src/_/builds
   - cp -r $CI_PROJECT_DIR /go/src/gitlab.com/Andoryuuta/byteframe
-  - ln -s /go/src/gitlab.com/Andoryuuta /go/src/_builds/Andoryuuta
+  - ln -s /go/src/gitlab.com/Andoryuuta /go/src/_/builds/Andoryuuta
   - go get -v -d ./...
 
 unit_tests:
