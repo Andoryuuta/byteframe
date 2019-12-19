@@ -1,6 +1,6 @@
 # Byteframe
 
-[![GoDoc](https://godoc.org/github.com/Andoryuuta/byteframe?status.svg)](https://godoc.org/github.com/Andoryuuta/byteframe)
+[![GoDoc](https://godoc.org/github.com/Andoryuuta/byteframe?status.svg)](https://godoc.org/github.com/Andoryuuta/byteframe) [![pipeline status](https://gitlab.com/Andoryuuta/byteframe/badges/master/pipeline.svg)](https://gitlab.com/Andoryuuta/byteframe/commits/master) [![coverage report](https://gitlab.com/Andoryuuta/byteframe/badges/master/coverage.svg)](https://gitlab.com/Andoryuuta/byteframe/commits/master)
 
 Byteframe is a small helper library for reading and writing binary data in Go.
 
