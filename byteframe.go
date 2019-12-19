@@ -6,6 +6,7 @@ package byteframe
 */
 
 import (
+	"bytes"
 	"encoding/binary"
 	"errors"
 	"io"
@@ -226,6 +227,12 @@ func (b *ByteFrame) WriteBytes(x []byte) {
 	b.wprologue(uint(len(x)))
 }
 
+// WriteNullTerminatedBytes write a slice bytes with an additional NULL terminator.
+func (b *ByteFrame) WriteNullTerminatedBytes(x []byte) {
+	b.WriteBytes(x)
+	b.WriteUint8(0)
+}
+
 // ReadUint8 writes a uint8 at the current index.
 func (b *ByteFrame) ReadUint8() (x uint8) {
 	if !b.rcheck(1) {
@@ -334,4 +341,17 @@ func (b *ByteFrame) ReadBytes(size uint) (x []byte) {
 	x = b.buf[b.index : b.index+size]
 	b.rprologue(size)
 	return
+}
+
+// ReadNullTerminatedBytes reads bytes up to a NULL terminator.
+func (b *ByteFrame) ReadNullTerminatedBytes() []byte {
+	tmpData := b.DataFromCurrent()
+	tmp := bytes.SplitN(tmpData, []byte{0x00}, 2)[0]
+
+	if len(tmp) == len(tmpData) {
+		return []byte{}
+	}
+
+	b.rprologue(uint(len(tmp)) + 1)
+	return tmp
 }

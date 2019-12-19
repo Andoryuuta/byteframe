@@ -278,6 +278,23 @@ func TestWriteBytes(t *testing.T) {
 	}
 }
 
+func TestWriteNullTerminatedBytes(t *testing.T) {
+	want := []byte{0x48, 0x65, 0x6C, 0x6C, 0x6F, 0x00, 0x57, 0x6F, 0x72, 0x6C, 0x64, 0x21, 0x00, 0x00}
+	have0 := []byte{0x48, 0x65, 0x6C, 0x6C, 0x6F}
+	have1 := []byte{0x57, 0x6F, 0x72, 0x6C, 0x64, 0x21}
+	have2 := []byte{}
+
+	bf := NewByteFrame()
+	bf.WriteNullTerminatedBytes(have0)
+	bf.WriteNullTerminatedBytes(have1)
+	bf.WriteNullTerminatedBytes(have2)
+
+	got := bf.Data()
+	if !bytes.Equal(got, want) {
+		t.Errorf("got\n\t%s\nwant\n\t%s", hex.Dump(got), hex.Dump(want))
+	}
+}
+
 func TestReadUint8(t *testing.T) {
 	have := []byte{0xFF}
 	want := uint8(0xFF)
@@ -545,22 +562,25 @@ func TestReadWriteSeek(t *testing.T) {
 	}
 }
 
-/*
+func TestReadNullTerminatedBytes(t *testing.T) {
+	have := []byte{0x48, 0x65, 0x6C, 0x6C, 0x6F, 0x00, 0x57, 0x6F, 0x72, 0x6C, 0x64, 0x21, 0x00, 0x00}
+	want0 := []byte{0x48, 0x65, 0x6C, 0x6C, 0x6F}
+	want1 := []byte{0x57, 0x6F, 0x72, 0x6C, 0x64, 0x21}
+	want2 := []byte{}
+	bf := NewByteFrameFromBytes(have)
 
+	got0 := bf.ReadNullTerminatedBytes()
+	got1 := bf.ReadNullTerminatedBytes()
+	got2 := bf.ReadNullTerminatedBytes()
 
-func TestReadBytes(t *testing.T) {
-	want := []byte{0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77}
-	bf := NewByteFrame()
-
-	bf.WriteBytes([]byte{0x00})
-	bf.WriteBytes([]byte{0x11})
-	bf.WriteBytes([]byte{0x22, 0x33, 0x44})
-	bf.WriteBytes([]byte{0x55, 0x66})
-	bf.WriteBytes([]byte{0x77})
-
-	got := bf.Data()
-	if !bytes.Equal(got, want) {
-		t.Errorf("got\n\t%s\nwant\n\t%s", hex.Dump(got), hex.Dump(want))
+	if !bytes.Equal(got0, want0) {
+		t.Errorf("got\n\t%s\nwant\n\t%s", hex.Dump(got0), hex.Dump(want0))
 	}
+	if !bytes.Equal(got1, want1) {
+		t.Errorf("got\n\t%s\nwant\n\t%s", hex.Dump(got1), hex.Dump(want1))
+	}
+	if !bytes.Equal(got2, want2) {
+		t.Errorf("got\n\t%s\nwant\n\t%s", hex.Dump(got2), hex.Dump(want2))
+	}
+
 }
-*/
