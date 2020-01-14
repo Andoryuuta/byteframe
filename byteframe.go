@@ -233,7 +233,7 @@ func (b *ByteFrame) WriteNullTerminatedBytes(x []byte) {
 	b.WriteUint8(0)
 }
 
-// ReadUint8 writes a uint8 at the current index.
+// ReadUint8 reads a uint8 at the current index.
 func (b *ByteFrame) ReadUint8() (x uint8) {
 	if !b.rcheck(1) {
 		b.rerr()
@@ -243,7 +243,7 @@ func (b *ByteFrame) ReadUint8() (x uint8) {
 	return
 }
 
-// ReadUint16 writes a uint16 at the current index.
+// ReadUint16 reads a uint16 at the current index.
 func (b *ByteFrame) ReadUint16() (x uint16) {
 	if !b.rcheck(2) {
 		b.rerr()
@@ -253,7 +253,7 @@ func (b *ByteFrame) ReadUint16() (x uint16) {
 	return
 }
 
-// ReadUint32 writes a uint32 at the current index.
+// ReadUint32 reads a uint32 at the current index.
 func (b *ByteFrame) ReadUint32() (x uint32) {
 	if !b.rcheck(4) {
 		b.rerr()
@@ -263,7 +263,7 @@ func (b *ByteFrame) ReadUint32() (x uint32) {
 	return
 }
 
-// ReadUint64 writes a uint64 at the current index.
+// ReadUint64 reads a uint64 at the current index.
 func (b *ByteFrame) ReadUint64() (x uint64) {
 	if !b.rcheck(8) {
 		b.rerr()
@@ -273,7 +273,7 @@ func (b *ByteFrame) ReadUint64() (x uint64) {
 	return
 }
 
-// ReadInt8 writes a int8 at the current index.
+// ReadInt8 reads a int8 at the current index.
 func (b *ByteFrame) ReadInt8() (x int8) {
 	if !b.rcheck(1) {
 		b.rerr()
@@ -283,7 +283,7 @@ func (b *ByteFrame) ReadInt8() (x int8) {
 	return
 }
 
-// ReadInt16 writes a int16 at the current index.
+// ReadInt16 reads a int16 at the current index.
 func (b *ByteFrame) ReadInt16() (x int16) {
 	if !b.rcheck(2) {
 		b.rerr()
@@ -293,7 +293,7 @@ func (b *ByteFrame) ReadInt16() (x int16) {
 	return
 }
 
-// ReadInt32 writes a int32 at the current index.
+// ReadInt32 reads a int32 at the current index.
 func (b *ByteFrame) ReadInt32() (x int32) {
 	if !b.rcheck(4) {
 		b.rerr()
@@ -303,7 +303,7 @@ func (b *ByteFrame) ReadInt32() (x int32) {
 	return
 }
 
-// ReadInt64 writes a int64 at the current index.
+// ReadInt64 reads a int64 at the current index.
 func (b *ByteFrame) ReadInt64() (x int64) {
 	if !b.rcheck(8) {
 		b.rerr()
@@ -313,7 +313,7 @@ func (b *ByteFrame) ReadInt64() (x int64) {
 	return
 }
 
-// ReadFloat32 writes a float32 at the current index.
+// ReadFloat32 reads a float32 at the current index.
 func (b *ByteFrame) ReadFloat32() (x float32) {
 	if !b.rcheck(4) {
 		b.rerr()
@@ -323,7 +323,7 @@ func (b *ByteFrame) ReadFloat32() (x float32) {
 	return
 }
 
-// ReadFloat64 writes a float64 at the current index.
+// ReadFloat64 reads a float64 at the current index.
 func (b *ByteFrame) ReadFloat64() (x float64) {
 	if !b.rcheck(8) {
 		b.rerr()
