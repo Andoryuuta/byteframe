@@ -42,6 +42,18 @@ func TestWriteUint8(t *testing.T) {
 	}
 }
 
+func TestWriteBool(t *testing.T) {
+	want := []byte{1}
+	bf := NewByteFrame()
+
+	bf.WriteBool(true)
+
+	got := bf.Data()
+	if !bytes.Equal(got, want) {
+		t.Errorf("got\n\t%s\nwant\n\t%s", hex.Dump(got), hex.Dump(want))
+	}
+}
+
 func TestWriteUint16LE(t *testing.T) {
 	want := []byte{0xBB, 0xAA}
 	bf := NewByteFrame()
@@ -301,6 +313,17 @@ func TestReadUint8(t *testing.T) {
 	bf := NewByteFrameFromBytes(have)
 
 	got := bf.ReadUint8()
+	if got != want {
+		t.Errorf("got %v, want %v", got, want)
+	}
+}
+
+func TestReadBool(t *testing.T) {
+	have := []byte{0x1}
+	want := true
+	bf := NewByteFrameFromBytes(have)
+
+	got := bf.ReadBool()
 	if got != want {
 		t.Errorf("got %v, want %v", got, want)
 	}

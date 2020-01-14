@@ -155,6 +155,16 @@ func (b *ByteFrame) WriteUint8(x uint8) {
 	b.wprologue(1)
 }
 
+// WriteBool writes a bool at the current index
+// (1 byte. true -> 1, false -> 0)
+func (b *ByteFrame) WriteBool(x bool) {
+	if x {
+		b.WriteUint8(1)
+	} else {
+		b.WriteUint8(0)
+	}
+}
+
 // WriteUint16 writes a uint16 at the current index.
 func (b *ByteFrame) WriteUint16(x uint16) {
 	b.wcheck(2)
@@ -240,6 +250,14 @@ func (b *ByteFrame) ReadUint8() (x uint8) {
 	}
 	x = uint8(b.buf[b.index])
 	b.rprologue(1)
+	return
+}
+
+// ReadBool reads a bool at the current index
+// (1 byte. b > 0 -> true, b == 0 -> false)
+func (b *ByteFrame) ReadBool() (x bool) {
+	tmp := b.ReadUint8()
+	x = tmp > 0
 	return
 }
 
